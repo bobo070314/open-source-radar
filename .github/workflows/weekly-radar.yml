@@ -4,8 +4,6 @@ on:
   schedule:
     # 每周一 09:00 北京时间 = UTC 周一 01:00
     - cron: "0 1 * * 1"
-    # [临时验证] 每 5 分钟，用于确认 schedule 事件真的会触发；验证后立即移除
-    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 permissions:
