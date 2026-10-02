@@ -112,6 +112,38 @@ topic:quantitative-trading stars:>300 pushed:>2026-06-01
 
 ---
 
+## 验证记录（2026-10-02，端到端）
+
+**两次云端运行全部 success**，产出已自动提交回仓库。
+
+| 检查项 | 结果 |
+|---|---|
+| 工作流 YAML 语法 | 通过（PyYAML 解析） |
+| `scripts/scan.sh` bash 语法 | 通过（`bash -n`） |
+| 本地实跑 | 11 组关键词，失败 0 组 |
+| 仓库内换行符 | 全部 LF，CR 字符数 0 |
+| 云端运行 1（checkout@v4） | success，1m30s，产出已提交 |
+| 云端运行 2（checkout@v7） | success，1m29s，无弃用告警 |
+
+### 过程中修掉的三个坑（每一个都会让云端直接失败）
+
+1. **YAML 缩进被模板字符串撑破** —— 最初把含真实换行的 Go 模板塞进 `run: |` 块标量，
+   PyYAML 在第 56 行报 `ScannerError: could not find expected ':'`。
+   已把扫描逻辑抽成独立文件 `scripts/scan.sh`，workflow 只负责调用，彻底规避缩进规则。
+2. **CRLF 换行污染** —— Windows 的 `core.autocrlf=true` 会在检出时把 `.sh` 变成 CRLF，
+   推到 Linux runner 上 bash 直接报 `$'\r': command not found`。已加 `.gitattributes` 强制 `eol=lf`。
+3. **Markdown 表格被撑破** —— 项目简介里只要出现 `|` 就会破坏表格结构。输出已改为列表格式。
+
+### 运行信息
+
+- 仓库：https://github.com/bobo070314/open-source-radar （公开）
+- 工作流：`weekly-open-source-radar`，状态 `active`
+- 排程：每周一 09:00 北京时间（UTC `0 1 * * 1`）
+- 手动触发：`gh workflow run weekly-radar.yml`
+- 查看运行：`gh run list --limit 5`
+
+---
+
 ## 一个诚实的说明
 
 雷达只做**发现**：它输出的是"候选清单 + 元数据"，**不代表这些项目可用**。
