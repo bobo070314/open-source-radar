@@ -1,0 +1,9 @@
+# 强制 LF 换行：本仓库的脚本跑在 Linux（GitHub Actions ubuntu-latest）上，
+# 若被 Windows 的 CRLF 转换污染，bash 会报 $'\r': command not found 而直接失败。
+* text=auto eol=lf
+
+*.sh   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.txt  text eol=lf
+*.md   text eol=lf
