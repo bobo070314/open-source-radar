@@ -1,0 +1,24 @@
+# 开源雷达 · 搜索关键词
+# 每行一条 GitHub 搜索表达式，空行和 # 开头的行会被忽略
+# 语法参考：https://docs.github.com/search-github/searching-on-github/searching-for-repositories
+
+# —— 赛道：AI Agent 本体 ——
+topic:ai-agent stars:>3000 archived:false
+topic:llm-agent stars:>1500 archived:false
+agent harness stars:>500 pushed:>2026-06-01
+
+# —— 赛道：技能 / 记忆 / 上下文（和你正在搭的路子重合）——
+agent skills claude stars:>500
+agent memory stars:>400 pushed:>2026-06-01
+context engineering stars:>300 pushed:>2026-06-01
+
+# —— 赛道：自进化 / 自动化智能体 ——
+self-evolving agent stars:>300
+autonomous agent workflow stars:>500 pushed:>2026-06-01
+
+# —— 赛道：今年新起的高星项目（防信息茧房）——
+created:>2026-01-01 stars:>600
+
+# —— 你自己的领域，按需增删 ——
+stock analysis llm stars:>200 pushed:>2026-06-01
+wechat official account automation stars:>200
